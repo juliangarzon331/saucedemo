@@ -1,9 +1,7 @@
 package com.demo.test.stepsdefinitions;
 
 import com.demo.test.questions.VerifyProductName;
-import com.demo.test.tasks.Login;
-import com.demo.test.tasks.OpenPage;
-import com.demo.test.tasks.SelectProduct;
+import com.demo.test.tasks.*;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -43,9 +41,19 @@ public class SauceDemoStepsDefinitions {
     @Then("debo ver el nombre del producto {string}")
     public void deboVerElNombreDelProducto(String producto) {
         theActorInTheSpotlight().should(seeThat(VerifyProductName.productNameInThePage(producto)));
+    }
+
+    @When("ordeno la lista de productos por precio ascendente {string}")
+    public void ordenoLaListaDeProductosPorPrecioAscendente(String opcion) {
+        theActorInTheSpotlight().attemptsTo(OrderListOfProduct.byOption(opcion));
+       // theActorInTheSpotlight().attemptsTo(GoToAboutPage.aboutlink());
+       // theActorInTheSpotlight().attemptsTo(Scroll.toElementPage());
+        theActorInTheSpotlight().attemptsTo(OrderPriceList.fromMintoMax());
 
 
-
+    }
+    @Then("valido que la lista de productos se ordeno exitosamente")
+    public void validoQueLaListaDeProductosSeOrdenoExitosamente() {
 
     }
 
